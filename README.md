@@ -1,1 +1,1 @@
-stratos-autodelegation
+stratos-autodelegation v.1
