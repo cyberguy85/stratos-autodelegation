@@ -1,8 +1,8 @@
 # Build the Image
-docker build -t idep-delegation-sanford .
+docker build -t stratos-delegation-tropos01 .
 
 # Tag it 
-docker tag idep-delegation-sanford:latest makalfe/idep-delegation-sanford:latest
+docker tag stratos-delegation-tropos01:latest cyberguy85/stratos-delegation-tropos01:latest
 
 # Push it
-docker push makalfe/idep-delegation-sanford:latest
+docker push cyberguy85/stratos-delegation-tropos01:latest

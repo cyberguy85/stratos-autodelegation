@@ -155,7 +155,7 @@ class IdepAutodelegation():
         '''
         Obtain the IDEP balance
         '''
-        proc = Popen([ f"iond q bank balances {self.wallet_key}" ], stdout=PIPE, shell=True)
+        proc = Popen([ f"stchaincli query account {self.wallet_key}" ], stdout=PIPE, shell=True)
         (out, err) = proc.communicate()
         line = self.parse_subprocess( out, 'amount' )
         balance = line.split('"')[1]
@@ -165,7 +165,7 @@ class IdepAutodelegation():
         '''
         Distribute the rewards from the validator and return the hash
         '''
-        child = pexpect.spawn(f"iond tx distribution withdraw-rewards { self.validator_key } --chain-id={ self.chain_id } --from {self.wallet_name} -y", timeout=10)
+        child = pexpect.spawn(f"stchaincli tx distribution withdraw-all-rewards { self.validator_key } --chain-id={ self.chain_id } --from {self.wallet_name} -y", timeout=10)
         child.expect( b'Enter keyring passphrase:' ) 
         child.sendline( self.password )   
         child.expect( pexpect.EOF )                                                                                                                                     
@@ -178,7 +178,7 @@ class IdepAutodelegation():
         '''
         Distribute the comission for the validator and return the hash
         '''
-        child = pexpect.spawn(f"iond tx distribution withdraw-rewards { self.validator_key } --chain-id={ self.chain_id } --from {self.wallet_name} --commission -y", timeout=10)
+        child = pexpect.spawn(f"stchaincli tx distribution withdraw-all-rewards { self.validator_key } --chain-id={ self.chain_id } --from {self.wallet_name} --commission -y", timeout=10)
         child.expect( b'Enter keyring passphrase:' ) 
         child.sendline( self.password )   
         child.expect( pexpect.EOF )                                                                                                                                     
@@ -191,7 +191,7 @@ class IdepAutodelegation():
         '''
         Delegate the amount to the validator
         '''
-        child = pexpect.spawn( f'iond tx staking delegate { self.validator_key } { amount }idep --from { self.wallet_name } --chain-id { self.chain_id } -y', timeout=10)
+        child = pexpect.spawn( f'stchaincli tx staking delegate { self.validator_key } { amount }ustos --from { self.wallet_name } --chain-id { self.chain_id } -y', timeout=10)
         child.expect( b'Enter keyring passphrase:' ) 
         child.sendline( self.password )   
         child.expect( pexpect.EOF )                                                                                                                                     
@@ -204,7 +204,7 @@ class IdepAutodelegation():
         '''
         Obtain the delegation amount for the validator
         '''
-        proc = Popen([ f"iond q staking delegations-to {self.validator_key} --chain-id={self.chain_id}" ], stdout=PIPE, shell=True)
+        proc = Popen([ f"stchaincli query staking delegations-to {self.validator_key} --chain-id={self.chain_id}" ], stdout=PIPE, shell=True)
         (out, err) = proc.communicate()
         line = self.parse_subprocess( out, 'shares' )
         balance = self.shares_to_decimal( line.split('"')[1].split(".")[0]) 
