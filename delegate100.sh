@@ -1,4 +1,4 @@
-stchaincli tx staking delegate stvaloper1vfeuy7gkdsfun2u9a896sam3ss0mqvxlk9rd0t "100000000000ustos" \
+stchaincli tx staking delegate stvaloper1vfeuy7gkdsfun2u9a896sam3ss0mqvxlk9rd0t "100000000001ustos" \
 --chain-id=tropos-1 \
 --gas="auto" \
 --gas-adjustment=1.5 \
