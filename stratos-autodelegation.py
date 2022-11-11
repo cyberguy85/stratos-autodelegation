@@ -63,24 +63,24 @@ class IdepAutodelegation():
         # sleep time between delegation cycles
         if "SLEEP_TIME" in os.environ:
             self.sleep_time = int(os.environ['SLEEP_TIME'])
-        elif 'sleep_time' in self.config['IDEP']:
-            self.sleep_time = int(self.config['IDEP']['sleep_time'])
+        elif 'sleep_time' in self.config['STRATOS']:
+            self.sleep_time = int(self.config['STRATOS']['sleep_time'])
         else:
             self.sleep_time = 600
         
         # bank reserve
         if "IDEP_RESERVE" in os.environ:
             self.reserve = float(os.environ['IDEP_RESERVE'])
-        elif 'reserve' in self.config['IDEP']:
-            self.reserve = float(self.config['IDEP']['reserve'])
+        elif 'reserve' in self.config['STRATOS']:
+            self.reserve = float(self.config['STRATOS']['reserve'])
         else:
             self.reserve = 0.1000
 
         # Prompt for the password if not in environment
         if "IDEP_PASSWORD" in os.environ:
             self.password = os.environ['IDEP_PASSWORD']
-        elif 'password' in self.config['IDEP']:
-            self.password = self.config['IDEP']['password']
+        elif 'password' in self.config['STRATOS']:
+            self.password = self.config['STRATOS']['password']
         else:
             self.password = getpass.getpass("Enter the wallet password: ")
 
@@ -88,7 +88,7 @@ class IdepAutodelegation():
         if "CHAIN_ID" in os.environ:
             self.chain_id = os.environ['CHAIN_ID']
         else:
-            self.chain_id = self.config['IDEP']['chain_id']
+            self.chain_id = self.config['STRATOS']['chain_id']
 
         # wallet name
         if "WALLET_NAME" in os.environ:
@@ -96,29 +96,29 @@ class IdepAutodelegation():
         elif "WALLETNAME" in os.environ:
             self.wallet_name = os.environ['WALLETNAME']
         else:
-            self.wallet_name = self.config['IDEP']['wallet_name']
+            self.wallet_name = self.config['STRATOS']['wallet_name']
         
         # wallet and validator keys
         if "WALLET_KEY" in os.environ:
             self.wallet_key = os.environ['WALLET_KEY']
-        elif 'wallet_key' in self.config['IDEP']:
-            self.wallet_key = self.config['IDEP']['wallet_key']
+        elif 'wallet_key' in self.config['STRATOS']:
+            self.wallet_key = self.config['STRATOS']['wallet_key']
         elif "WALLET_ADDRESS" in os.environ:
             self.wallet_key = os.environ['WALLET_ADDRESS']
-        elif 'wallet_address' in self.config['IDEP']:
-            self.wallet_key = self.config['IDEP']['wallet_address']
+        elif 'wallet_address' in self.config['STRATOS']:
+            self.wallet_key = self.config['STRATOS']['wallet_address']
         else:
             print('Unable to find the wallet address in the configuration file. Exiting...')
             exit()
 
         if "VALIDATOR_KEY" in os.environ:
             self.validator_key = os.environ['VALIDATOR_KEY']
-        elif 'validator_key' in self.config['IDEP']:
-            self.validator_key = self.config['IDEP']['validator_key']
+        elif 'validator_key' in self.config['STRATOS']:
+            self.validator_key = self.config['STRATOS']['validator_key']
         elif "VALIDATOR_ADDRESS" in os.environ:
             self.validator_key = os.environ['VALIDATOR_ADDRESS']
-        elif 'validator_address' in self.config['IDEP']:
-            self.validator_key = self.config['IDEP']['validator_address']
+        elif 'validator_address' in self.config['STRATOS']:
+            self.validator_key = self.config['STRATOS']['validator_address']
         else:
             print('Unable to find the validator address in the configuration file. Exiting...')
             exit()
